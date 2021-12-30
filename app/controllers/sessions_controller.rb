@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       # Осуществить вход пользователя и перенаправление на страницу профиля.
     else
-      flash[:danger] = 'Invalid email/password combination' # Не совсем верно!
+      flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
     end
   end
