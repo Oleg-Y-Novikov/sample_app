@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       # Осуществить вход пользователя и перенаправление на страницу профиля.
       log_in user # хелпер log_in
+      remember user
       redirect_to user # Rails автоматически конвертирует его в маршрут user_url(user)
     else
       flash.now[:danger] = 'Invalid email/password combination'
