@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  attr_accessor :remember_token
+  attr_accessor :remember_token, :activation_token
+
+  before_save   :downcase_email
+  before_create :create_activation_digest
 
   VALID_EMAIL_REGEX = /\A[a-z\d_+.\-]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
-
-  before_save { email.downcase! }
 
   # аргумент presence: true — это хэш опций с одним элементом
   # фигурные скобки необязательны, если хэш передаётся последним аргументом в метод
@@ -43,5 +44,18 @@ class User < ApplicationRecord
   # Забывает пользователя
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  private
+
+  # Переводит адрес электронной почты в нижний регистр.
+  def downcase_email
+    self.email = email.downcase
+  end
+
+  # Создает и присваивает активационнй токен и дайджест.
+  def create_activation_digest
+    self.activation_token  = User.new_token
+    self.activation_digest = User.digest(activation_token)
   end
 end
