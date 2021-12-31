@@ -34,11 +34,12 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
-  # Возвращает true, если предоставленный токен совпадает с дайджестом.
-  def authenticated?(remember_token)
-    return false if remember_digest.nil?
+  # Возвращает true, если данный токен совпадает с дайджестом.
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
 
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   # Забывает пользователя
