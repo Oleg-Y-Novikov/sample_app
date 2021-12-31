@@ -6,6 +6,7 @@ ruby '2.6.6'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.0.4', '>= 6.0.4.4'
 
+gem 'active_storage_validations'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'faker'
