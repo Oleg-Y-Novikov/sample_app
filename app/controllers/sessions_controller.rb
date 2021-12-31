@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       # Осуществить вход пользователя и перенаправление на страницу профиля.
       log_in user # хелпер log_in
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user # Rails автоматически конвертирует его в маршрут user_url(user)
+      redirect_back_or user
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
