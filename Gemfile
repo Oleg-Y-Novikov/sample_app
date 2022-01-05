@@ -6,6 +6,8 @@ ruby '2.6.6'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.0.4', '>= 6.0.4.4'
 
+gem 'activeadmin'
+gem 'inherited_resources'
 gem 'devise'
 gem 'mini_magick'
 gem 'image_processing'
